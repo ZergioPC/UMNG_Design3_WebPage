@@ -1,0 +1,72 @@
+---
+import { testimonial } from '@/data/siteConfig';
+
+const { quote, author, role } = testimonial;
+---
+
+<section class="testimonial">
+  <div class="container">
+    <blockquote class="testimonial__quote">
+      <svg class="testimonial__quote-icon" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.065 1.515-1.867 2.558-2.403L9.373 5c-.8.396-1.56.898-2.26 1.505-.71.607-1.34 1.305-1.9 2.094s-.98 1.68-1.25 2.69-.346 2.04-.217 3.1c.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003zm9.124 0c0-.88-.23-1.618-.69-2.217-.326-.42-.768-.69-1.327-.817-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.06 1.515-1.867 2.558-2.403L18.49 5c-.8.396-1.555.898-2.26 1.505-.708.607-1.34 1.305-1.894 2.094-.556.79-.97 1.68-1.24 2.69-.273 1-.345 2.04-.217 3.1.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l-.007.006z"/>
+      </svg>
+      <p class="testimonial__text">{quote}</p>
+      <footer class="testimonial__footer">
+        <cite class="testimonial__author">{author}</cite>
+        <span class="testimonial__role">{role}</span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .testimonial {
+    padding-block: var(--space-16);
+    background-color: var(--color-bg);
+    text-align: center;
+  }
+
+  .testimonial__quote {
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .testimonial__quote-icon {
+    color: var(--color-secondary);
+    margin-bottom: var(--space-6);
+  }
+
+  .testimonial__text {
+    font-family: var(--font-brand);
+    font-size: var(--text-2xl);
+    font-style: italic;
+    color: var(--color-heading);
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+  }
+
+  .testimonial__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .testimonial__author {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-style: normal;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .testimonial__role {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .testimonial__text {
+      font-size: var(--text-xl);
+    }
+  }
+</style>

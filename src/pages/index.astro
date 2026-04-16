@@ -1,6 +1,29 @@
 ---
-import Layout from "@/layouts/Layout.astro"
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import FeaturedCollection from "@/components/FeaturedCollection.astro";
+import BrandStory from "@/components/BrandStory.astro";
+import WhyDegoro from "@/components/WhyDegoro.astro";
+import Testimonial from "@/components/Testimonial.astro";
+import Newsletter from "@/components/Newsletter.astro";
+import { getFeaturedProducts } from "@/data/products";
+
+const featuredProducts = getFeaturedProducts();
 ---
-<Layout titulo="Degoro" >
-  <h1>Hola</h1>
+
+<Layout titulo="Degoro — Tejidos únicos, hechos con el corazón">
+  <main>
+    <Hero />
+    <FeaturedCollection products={featuredProducts} />
+    <BrandStory />
+    <WhyDegoro />
+    <Testimonial />
+    <Newsletter />
+  </main>
 </Layout>
+
+<style is:global>
+  main {
+    min-height: 100vh;
+  }
+</style>

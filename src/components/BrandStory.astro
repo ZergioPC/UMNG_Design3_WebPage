@@ -1,0 +1,88 @@
+---
+import { brandStory } from '@/data/siteConfig';
+
+const { title, description, image } = brandStory;
+---
+
+<section class="brand-story">
+  <div class="container">
+    <div class="brand-story__grid">
+      <div class="brand-story__image-wrapper">
+        <img
+          src={image}
+          alt="Artesano trabajando en un telar tradicional"
+          class="brand-story__image"
+          loading="lazy"
+        />
+      </div>
+      <div class="brand-story__content">
+        <h2 class="brand-story__title">{title}</h2>
+        <p class="brand-story__description">{description}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .brand-story {
+    background-color: var(--color-primary);
+    padding-block: var(--space-16);
+  }
+
+  .brand-story__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .brand-story__image-wrapper {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .brand-story__image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .brand-story__image-wrapper:hover .brand-story__image {
+    transform: scale(1.05);
+  }
+
+  .brand-story__content {
+    color: var(--color-smoke-white);
+  }
+
+  .brand-story__title {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    color: var(--color-secondary-light);
+    margin-bottom: var(--space-6);
+  }
+
+  .brand-story__description {
+    font-size: var(--text-lg);
+    line-height: 1.8;
+    color: var(--color-secondary-light);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 900px) {
+    .brand-story__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .brand-story__image {
+      height: 300px;
+    }
+
+    .brand-story__title {
+      font-size: var(--text-2xl);
+    }
+  }
+</style>

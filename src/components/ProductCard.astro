@@ -1,0 +1,114 @@
+---
+import Button from './Button.astro';
+import type { Product } from '@/types/index.d.ts';
+import { formatPrice } from '@/data/products';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const formattedPrice = formatPrice(product.price);
+---
+
+<article class="product-card">
+  <div class="product-card__image-wrapper">
+    <img
+      src={product.image}
+      alt={`${product.name} - ${product.description}`}
+      loading="lazy"
+      class="product-card__image"
+    />
+  </div>
+  <div class="product-card__content">
+    <span class="product-card__category">{product.category}</span>
+    <h3 class="product-card__title">{product.name}</h3>
+    <p class="product-card__description">{product.description}</p>
+    <div class="product-card__footer">
+      <span class="product-card__price">{formattedPrice}</span>
+      <Button href={`/productos/${product.slug}`}>Ver más</Button>
+    </div>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .product-card__image-wrapper {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: var(--color-secondary-light);
+  }
+
+  .product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-card__image {
+    transform: scale(1.05);
+  }
+
+  .product-card__content {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+  }
+
+  .product-card__category {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+  }
+
+  .product-card__title {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--color-heading);
+    margin: 0;
+  }
+
+  .product-card__description {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .product-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .product-card__price {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+</style>

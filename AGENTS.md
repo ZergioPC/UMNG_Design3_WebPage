@@ -203,6 +203,7 @@ Respetar **estrictamente** esta paleta y sus roles. No introducir colores fuera 
 
 ---
 
-## 7. Version Control
+## 7. IMPORTANTE
 
-- No Commitear nada
+- No tienes permiso para hacer commits
+- No tienes permiso de ejecutar comandos de terminal (me dejas las instrucciones de lo que quieres hacer al final)

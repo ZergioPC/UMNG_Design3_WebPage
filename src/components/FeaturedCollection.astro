@@ -1,0 +1,64 @@
+---
+import ProductCard from './ProductCard.astro';
+import type { Product } from '@/types/index.d.ts';
+
+interface Props {
+  products: Product[];
+}
+
+const { products } = Astro.props;
+---
+
+<section class="featured-collection">
+  <div class="container">
+    <header class="featured-collection__header">
+      <h2 class="featured-collection__title">Colección Destacada</h2>
+      <p class="featured-collection__subtitle">
+        Piezas únicas creadas por artesanos colombianos
+      </p>
+    </header>
+    <div class="featured-collection__grid">
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-collection {
+    padding-block: var(--space-16);
+    background-color: var(--color-bg);
+  }
+
+  .featured-collection__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .featured-collection__title {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    color: var(--color-heading);
+    margin-bottom: var(--space-4);
+  }
+
+  .featured-collection__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 500px;
+    margin-inline: auto;
+  }
+
+  .featured-collection__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+  }
+
+  @media (max-width: 640px) {
+    .featured-collection__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
