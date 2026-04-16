@@ -16,4 +16,5 @@ export default defineConfig({
     },
   },
   output: "static",
+  base: "/UMNG_Design3_WebPage"
 });
