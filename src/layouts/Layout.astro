@@ -2,6 +2,8 @@
 import "@/styles/main.css";
 import Header from "@/components/Header.astro";
 
+import Logo from "@/assets/logo.png";
+
 interface Props {
   titulo: string;
   descripcion?: string;
@@ -25,7 +27,7 @@ const {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" href={Logo.src}>
   
   <title>{titulo}</title>
 </head>

@@ -16,7 +16,6 @@ const icons: Record<string, string> = {
     <div class="why-degoro__grid">
       {pillars.map((pillar) => (
         <article class="why-degoro__pillar">
-          <div class="why-degoro__icon" set:html={icons[pillar.icon]} />
           <h3 class="why-degoro__pillar-title">{pillar.title}</h3>
           <p class="why-degoro__pillar-description">{pillar.description}</p>
         </article>

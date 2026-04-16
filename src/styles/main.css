@@ -22,7 +22,7 @@
 
   --font-brand:   'Alegreya', serif;
   --font-heading: 'Alegreya', serif;
-  --font-body:    'Alegreya Sans', sans-serif;
+  --font-body:    'Alegreya', sans-serif;
 
   --text-xs:   clamp(0.75rem,  1.5vw, 0.875rem);
   --text-sm:   clamp(0.875rem, 1.8vw, 1rem);
