@@ -1,19 +1,20 @@
 ---
+import { Image } from "astro:assets";
+import logotipo from "@/assets/logotipo.png";
+
 const navLinks = [
   { href: '/tienda', label: 'Tienda' },
   { href: '/colecciones', label: 'Colecciones' },
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/contacto', label: 'Contacto' },
 ];
+
 ---
 
 <header class="header">
   <nav class="header__nav container">
     <a href="/" class="header__logo" aria-label="Degoro - Inicio">
-      <div class="header__logo-placeholder">
-        <span class="header__logo-text">Logo</span>
-      </div>
-      <span class="header__logotype">Degoro</span>
+      <Image src={logotipo} alt="logotipo"/>
     </a>
 
     <ul class="header__links">
@@ -69,9 +70,15 @@ const navLinks = [
 
   .header__logo {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: var(--space-3);
     text-decoration: none;
+  }
+
+  .header__logo img {
+    height: 50px;
+    object-fit: contain;
+    object-position: left;
   }
 
   .header__logo-placeholder {
