@@ -7,6 +7,8 @@ export interface Product {
   slug: string;
   isFeatured: boolean;
   category: string;
+  gender?: 'hombre' | 'mujer' | 'unisex';
+  sizes?: string[];
 }
 
 export interface Pillar {

@@ -15,17 +15,61 @@ try {
 ---
 
 <Layout titulo="Catálogo — Degoro">
-  <main class="catalog-page">
+  <main>
+    <div class="filter-bar">
+      <div class="container">
+        <div class="filter-bar__inner">
+          <div class="filter-bar__search">
+            <svg class="filter-bar__search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input
+              type="search"
+              id="search-input"
+              class="filter-bar__input"
+              placeholder="Buscar prendas..."
+              aria-label="Buscar por nombre"
+            />
+          </div>
+
+          <div class="filter-bar__gender">
+            <span class="filter-bar__label">Género:</span>
+            <div class="filter-bar__btn-group" role="radiogroup" aria-label="Filtrar por género">
+              <button class="filter-btn is-active" data-filter-gender="" role="radio" aria-checked="true">Todo</button>
+              <button class="filter-btn" data-filter-gender="hombre" role="radio" aria-checked="false">Hombre</button>
+              <button class="filter-btn" data-filter-gender="mujer" role="radio" aria-checked="false">Mujer</button>
+              <button class="filter-btn" data-filter-gender="unisex" role="radio" aria-checked="false">Unisex</button>
+            </div>
+          </div>
+
+          <div class="filter-bar__size">
+            <span class="filter-bar__label">Talla:</span>
+            <div class="filter-bar__btn-group" role="radiogroup" aria-label="Filtrar por talla">
+              <button class="size-btn is-active" data-filter-size="" role="radio" aria-checked="true">Todas</button>
+              <button class="size-btn" data-filter-size="XS" role="radio" aria-checked="false">XS</button>
+              <button class="size-btn" data-filter-size="S" role="radio" aria-checked="false">S</button>
+              <button class="size-btn" data-filter-size="L" role="radio" aria-checked="false">L</button>
+              <button class="size-btn" data-filter-size="XL" role="radio" aria-checked="false">XL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       {
         error ? (
           <p class="catalog-page__error">{error}</p>
-        ) : products.length === 0 ? (
-          <p class="catalog-page__empty">No hay productos disponibles.</p>
         ) : (
-          <div class="catalog-page__grid">
+          <div id="product-grid" class="catalog-page__grid">
             {products.map((product) => (
-              <ProductCard product={product} />
+              <div
+                class="product-wrapper"
+                data-product-gender={product.gender ?? ''}
+                data-product-sizes={(product.sizes ?? []).join(',')}
+              >
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         )
@@ -34,13 +78,60 @@ try {
   </main>
 </Layout>
 
+<script id="products-data" type="application/json">
+  {JSON.stringify(products)}
+</script>
+
+<script>
+  const searchInput = document.getElementById('search-input');
+  const wrappers = document.querySelectorAll('.product-wrapper');
+
+  function getActiveValue(selector) {
+    const active = document.querySelector(selector + '.is-active');
+    return active ? active.dataset.filterGender ?? active.dataset.filterSize ?? '' : '';
+  }
+
+  function filterProducts() {
+    const term = searchInput.value.toLowerCase();
+    const gender = getActiveValue('[data-filter-gender]');
+    const size = getActiveValue('[data-filter-size]');
+
+    wrappers.forEach((el) => {
+      const name = el.querySelector('.product-card__title')?.textContent ?? '';
+      const elGender = el.dataset.productGender ?? '';
+      const elSizes = el.dataset.productSizes ?? '';
+
+      const matchSearch = name.toLowerCase().includes(term);
+      const matchGender = !gender || elGender === gender;
+      const matchSize = !size || elSizes.split(',').includes(size);
+
+      el.classList.toggle('is-hidden', !(matchSearch && matchGender && matchSize));
+    });
+  }
+
+  searchInput.addEventListener('input', filterProducts);
+
+  document.querySelectorAll('[data-filter-gender], [data-filter-size]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.parentElement;
+      group.querySelectorAll('.is-active').forEach((b) => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-checked', 'true');
+      filterProducts();
+    });
+  });
+</script>
+
 <style>
-  .catalog-page {
-    padding-block: var(--space-16);
+  main {
     min-height: 100vh;
   }
 
   .catalog-page__error {
+    margin: 10px 0;
     text-align: center;
     color: var(--color-primary);
     font-size: var(--text-base);
@@ -49,22 +140,125 @@ try {
     border-radius: var(--radius-md);
   }
 
-  .catalog-page__empty {
-    text-align: center;
-    color: var(--color-text-muted);
-    font-size: var(--text-base);
-    padding: var(--space-8);
-  }
-
   .catalog-page__grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-6);
   }
 
+  .product-wrapper.is-hidden {
+    display: none;
+  }
+
   @media (max-width: 640px) {
     .catalog-page__grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Filter bar ── */
+  .filter-bar {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+  }
+
+  .filter-bar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-6);
+    padding-block: var(--space-4);
+  }
+
+  .filter-bar__search {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .filter-bar__search-icon {
+    position: absolute;
+    left: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    pointer-events: none;
+  }
+
+  .filter-bar__input {
+    width: 100%;
+    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-10);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .filter-bar__input:focus {
+    border-color: var(--color-accent);
+  }
+
+  .filter-bar__label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-right: var(--space-2);
+  }
+
+  .filter-bar__gender,
+  .filter-bar__size {
+    display: flex;
+    align-items: center;
+  }
+
+  .filter-bar__btn-group {
+    display: flex;
+    gap: 2px;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-full);
+    padding: 2px;
+  }
+
+  .filter-btn,
+  .size-btn {
+    padding: var(--space-1) var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover,
+  .size-btn:hover {
+    color: var(--color-text);
+  }
+
+  .filter-btn.is-active,
+  .size-btn.is-active {
+    background: var(--color-accent);
+    color: var(--color-smoke-white);
+  }
+
+  @media (max-width: 768px) {
+    .filter-bar__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-4);
+    }
+
+    .filter-bar__gender,
+    .filter-bar__size {
+      flex-wrap: wrap;
     }
   }
 </style>
