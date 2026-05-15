@@ -1,0 +1,207 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout titulo="Contáctenos — Degoro">
+  <main class="contact-page">
+    <div class="container">
+      <header class="contact-page__header">
+        <h1 class="contact-page__title">Contáctenos</h1>
+        <p class="contact-page__subtitle">
+          Estaremos encantados de escucharte. Escríbenos y te responderemos a la brevedad.
+        </p>
+      </header>
+
+      <div class="contact-page__content">
+        <form class="contact-form" action="#" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <label class="contact-form__field">
+            <span class="contact-form__label">Nombre</span>
+            <input class="contact-form__input" type="text" name="nombre" required placeholder="Tu nombre" />
+          </label>
+
+          <label class="contact-form__field">
+            <span class="contact-form__label">Correo electrónico</span>
+            <input class="contact-form__input" type="email" name="email" required placeholder="tu@correo.com" />
+          </label>
+
+          <label class="contact-form__field">
+            <span class="contact-form__label">Asunto</span>
+            <input class="contact-form__input" type="text" name="asunto" required placeholder="¿Sobre qué deseas hablar?" />
+          </label>
+
+          <label class="contact-form__field">
+            <span class="contact-form__label">Mensaje</span>
+            <textarea class="contact-form__textarea" name="mensaje" rows={6} required placeholder="Cuéntanos más..."></textarea>
+          </label>
+
+          <button class="contact-form__submit" type="submit">Enviar mensaje</button>
+        </form>
+
+        <aside class="contact-page__info">
+          <h2 class="contact-page__info-title">También puedes encontrarnos en</h2>
+          <dl class="contact-page__info-list">
+            <div>
+              <dt>Email</dt>
+              <dd>hola@degoro.com</dd>
+            </div>
+            <div>
+              <dt>Teléfono</dt>
+              <dd>+57 1 234 5678</dd>
+            </div>
+            <div>
+              <dt>Ubicación</dt>
+              <dd>Bogotá, Colombia</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .contact-page {
+    padding-block: var(--space-16);
+    min-height: 100vh;
+  }
+
+  .contact-page__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .contact-page__title {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    color: var(--color-heading);
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-page__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 540px;
+    margin-inline: auto;
+  }
+
+  .contact-page__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    background: var(--color-surface);
+    padding: var(--space-8);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-form__label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .contact-form__input,
+  .contact-form__textarea {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .contact-form__input:focus,
+  .contact-form__textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(81, 148, 116, 0.2);
+  }
+
+  .contact-form__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .contact-form__submit {
+    align-self: flex-start;
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--btn-primary-text);
+    background: var(--btn-primary-bg);
+    padding: var(--space-3) var(--space-8);
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease;
+  }
+
+  .contact-form__submit:hover {
+    background: var(--btn-primary-hover);
+  }
+
+  .contact-form__submit:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .contact-page__info {
+    background: var(--color-surface);
+    padding: var(--space-8);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  .contact-page__info-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    color: var(--color-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .contact-page__info-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .contact-page__info-list dt {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-1);
+  }
+
+  .contact-page__info-list dd {
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .contact-page__content {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-form__submit {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

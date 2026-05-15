@@ -1,0 +1,94 @@
+---
+import IconCart from "@/assets/icons/IconCart.astro";
+
+interface Props {
+  iconSize?: number
+  iconColor?: string
+}
+
+const {
+  iconSize = 24,
+  iconColor = "var(--color-text-muted)",
+} = Astro.props
+---
+
+<div id="cart">
+  <button type="button" id="cart-btn" aria-label="Carrito de compras" aria-expanded="false">
+    <IconCart class="cart-icon" size={iconSize} color={iconColor} />
+  </button>
+
+  <div id="cart-window" role="dialog" aria-label="Tu carrito">
+    Ventana del carrito.
+    <!-- YO AGREGO EL CONTENIDO DESPUES -->
+  </div>
+</div>
+
+<script is:inline>
+  const cart = document.getElementById("cart")
+  const btn = document.getElementById("cart-btn")
+  const win = document.getElementById("cart-window")
+  let open = false
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation()
+    open = !open
+    win.classList.toggle("cart-window--open", open)
+    btn.setAttribute("aria-expanded", String(open))
+  })
+
+  document.addEventListener("click", (e) => {
+    if (open && !cart.contains(e.target)) {
+      open = false
+      win.classList.remove("cart-window--open")
+      btn.setAttribute("aria-expanded", "false")
+    }
+  })
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && open) {
+      open = false
+      win.classList.remove("cart-window--open")
+      btn.setAttribute("aria-expanded", "false")
+      btn.focus()
+    }
+  })
+</script>
+
+<style>
+  #cart {
+    position: relative;
+  }
+
+  #cart-btn {
+    display: block;
+    aspect-ratio: 1/1;
+    width: 30px;
+  }
+
+  .cart-icon {
+    cursor: pointer;
+    display: block;
+  }
+
+  #cart-window {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: min(420px, 90vw);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-6);
+    z-index: 200;
+  }
+
+  #cart-window.cart-window--open {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>

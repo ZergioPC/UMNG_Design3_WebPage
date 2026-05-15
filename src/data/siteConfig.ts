@@ -32,7 +32,13 @@ export const pillars: Pillar[] = [
 export const brandStory: BrandStoryData = {
   title: 'Nuestra Historia',
   description: 'Degoro nació del deseo de conectar a las comunidades artesanales colombianas con personas que valoran la autenticidad y la historia detrás de cada prenda. Cada pieza que creamos es un puente entre la tradición y la moda contemporánea.',
-  image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800'
+  images: [
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
+    'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800',
+    'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800',
+    'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800',
+    'https://images.unsplash.com/photo-1601342630314-8427c38bf5e6?w=800',
+  ]
 };
 
 export const testimonial: Testimonial = {

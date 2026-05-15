@@ -1,0 +1,96 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import { fetchProducts } from '@/utils/api';
+import type { Product } from '@/types/index.d.ts';
+
+let products: Product[] = [];
+let error: string | null = null;
+
+try {
+  products = await fetchProducts();
+} catch (e) {
+  error = e instanceof Error ? e.message : 'Error desconocido';
+}
+---
+
+<Layout titulo="Catálogo — Degoro">
+  <main class="catalog-page">
+    <div class="container">
+      <header class="catalog-page__header">
+        <h1 class="catalog-page__title">Catálogo</h1>
+        <p class="catalog-page__subtitle">
+          Cada prenda cuenta una historia de tradición y amor por nuestra tierra
+        </p>
+      </header>
+
+      {
+        error ? (
+          <p class="catalog-page__error">{error}</p>
+        ) : products.length === 0 ? (
+          <p class="catalog-page__empty">No hay productos disponibles.</p>
+        ) : (
+          <div class="catalog-page__grid">
+            {products.map((product) => (
+              <ProductCard product={product} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .catalog-page {
+    padding-block: var(--space-16);
+    min-height: 100vh;
+  }
+
+  .catalog-page__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .catalog-page__title {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    color: var(--color-heading);
+    margin-bottom: var(--space-4);
+  }
+
+  .catalog-page__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 500px;
+    margin-inline: auto;
+  }
+
+  .catalog-page__error {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: var(--text-base);
+    padding: var(--space-8);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+  }
+
+  .catalog-page__empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    padding: var(--space-8);
+  }
+
+  .catalog-page__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-6);
+  }
+
+  @media (max-width: 640px) {
+    .catalog-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
