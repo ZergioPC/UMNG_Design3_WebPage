@@ -1,19 +1,32 @@
 ---
-import { brandStory } from '@/data/siteConfig';
+const title = 'Nuestra Historia'
+const description = 'Degoro nació del deseo de conectar a las comunidades artesanales colombianas con personas que valoran la autenticidad y la historia detrás de cada prenda. Cada pieza que creamos es un puente entre la tradición y la moda contemporánea.'
 
-const { title, description, image } = brandStory;
+const images = [
+  {
+    src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
+    alt: 'Artesana tejiendo en un telar tradicional'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800',
+    alt: 'Primer plano de textiles artesanales coloridos'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800',
+    alt: 'Prendas hechas a mano con fibras naturales'
+  }
+]
 ---
 
 <section class="brand-story">
   <div class="container">
     <div class="brand-story__grid">
-      <div class="brand-story__image-wrapper">
-        <img
-          src={image}
-          alt="Artesano trabajando en un telar tradicional"
-          class="brand-story__image"
-          loading="lazy"
-        />
+      <div class="brand-story__images">
+        {images.map((img) => (
+          <div class="brand-story__image-wrapper">
+            <img src={img.src} alt={img.alt} class="brand-story__image" loading="lazy" />
+          </div>
+        ))}
       </div>
       <div class="brand-story__content">
         <h2 class="brand-story__title">{title}</h2>
@@ -36,21 +49,35 @@ const { title, description, image } = brandStory;
     align-items: center;
   }
 
+  .brand-story__images {
+    display: flex;
+    gap: var(--space-4);
+    height: 400px;
+  }
+
   .brand-story__image-wrapper {
-    border-radius: var(--radius-lg);
+    flex-grow: 1;
+    flex-basis: 0;
+    border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
+    transition: flex-grow 0.4s ease;
+    cursor: pointer;
+  }
+
+  .brand-story__images:hover .brand-story__image-wrapper {
+    flex-grow: 0.3;
+  }
+
+  .brand-story__images .brand-story__image-wrapper:hover {
+    flex-grow: 2;
   }
 
   .brand-story__image {
     width: 100%;
-    height: 400px;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .brand-story__image-wrapper:hover .brand-story__image {
-    transform: scale(1.05);
+    display: block;
   }
 
   .brand-story__content {
@@ -77,8 +104,8 @@ const { title, description, image } = brandStory;
       gap: var(--space-8);
     }
 
-    .brand-story__image {
-      height: 300px;
+    .brand-story__images {
+      height: 250px;
     }
 
     .brand-story__title {

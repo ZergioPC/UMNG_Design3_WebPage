@@ -31,12 +31,6 @@ export interface HeroData {
   backgroundImage: string;
 }
 
-export interface BrandStoryData {
-  title: string;
-  description: string;
-  image: string;
-}
-
 export interface NewsletterData {
   title: string;
   subtitle: string;
