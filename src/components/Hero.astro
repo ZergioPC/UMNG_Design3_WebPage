@@ -18,7 +18,7 @@ const { tagline, subtitle, ctaText, backgroundImage } = heroData;
   <div class="hero__content container">
     <h1 class="hero__tagline">{tagline}</h1>
     <p class="hero__subtitle">{subtitle}</p>
-    <Button href="/catalogo" variant="primary">{ctaText}</Button>
+    <Button href={import.meta.env.BASE_URL + 'catalogo'} variant="primary">{ctaText}</Button>
   </div>
 </section>
 

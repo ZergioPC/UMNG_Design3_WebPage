@@ -16,5 +16,6 @@ export default defineConfig({
     },
   },
   output: "static",
-  base: "/UMNG_Design3_WebPage/"
+  base: process.env.CI ? "/UMNG_Design3_WebPage/" : "/",
+  trailingSlash: "always"
 });

@@ -5,11 +5,12 @@ import logo from "@/assets/logo.png";
 import Cart from "@/components/Cart.astro";
 import IconAccount from "@/assets/icons/IconAccount.astro";
 
+const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/catalogo', label: 'Catálogo' },
-  // { href: '/nosotros', label: 'Nosotros' },
-  { href: '/contact', label: 'Contacto' },
+  { href: base, label: 'Home' },
+  { href: `${base}catalogo`, label: 'Catálogo' },
+  // { href: `${base}nosotros`, label: 'Nosotros' },
+  { href: `${base}contacto`, label: 'Contacto' },
 ];
 
 const iconColor = "var(--color-text-muted)";
@@ -18,7 +19,7 @@ const iconSize = 34;
 
 <header class="header">
   <div class="header__top">
-    <a href="/" aria-label="Degoro - Inicio" class="header__logo">
+    <a href={import.meta.env.BASE_URL} aria-label="Degoro - Inicio" class="header__logo">
       <Image src={logo} alt="Degoro" />
     </a>
     <div class="header__icons">
