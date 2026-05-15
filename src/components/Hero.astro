@@ -2,7 +2,7 @@
 import Button from './Button.astro';
 import { heroData } from '@/data/siteConfig';
 
-const { tagline, subtitle, ctaText, ctaHref, backgroundImage } = heroData;
+const { tagline, subtitle, ctaText, backgroundImage } = heroData;
 ---
 
 <section class="hero">
@@ -18,7 +18,7 @@ const { tagline, subtitle, ctaText, ctaHref, backgroundImage } = heroData;
   <div class="hero__content container">
     <h1 class="hero__tagline">{tagline}</h1>
     <p class="hero__subtitle">{subtitle}</p>
-    <Button href={ctaHref} variant="primary">{ctaText}</Button>
+    <Button href="/catalogo" variant="primary">{ctaText}</Button>
   </div>
 </section>
 

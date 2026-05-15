@@ -1,0 +1,103 @@
+---
+import IconFacebook from "@/assets/icons/IconFacebook.astro"
+import IconInstagram from "@/assets/icons/IconInstagram.astro"
+import IconTikTok from "@/assets/icons/IconTikTok.astro"
+---
+
+<footer>
+  <div class="container">
+      <div class="contact">
+        <h3 class="heading">Contacto</h3>
+        <ul class="contact-list">
+          <li><a href="mailto:hola@degoro.com">hola@degoro.com</a></li>
+          <li><a href="tel:+5712345678">+57 1 234 5678</a></li>
+          <li>Bogotá, Colombia</li>
+        </ul>
+      </div>
+      <div class="social">
+        <h3 class="heading">Síguenos</h3>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" class="social-link">
+            <IconFacebook size={100} color="var(--color-secondary-light)" />
+          </a>
+          <a href="#" aria-label="Instagram" class="social-link">
+            <IconInstagram size={100} color="var(--color-secondary-light)" />
+          </a>
+          <a href="#" aria-label="TikTok" class="social-link">
+            <IconTikTok size={100} color="var(--color-secondary-light)" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <small>&copy; 2026 Degoro. Todos los derechos reservados.</small>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: var(--color-primary);
+    color: var(--color-smoke-white);
+    padding: var(--space-12) 0 var(--space-6);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .heading {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--color-secondary-light);
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .contact-list a {
+    color: var(--color-smoke-white);
+    transition: color 0.2s;
+  }
+
+  .contact-list a:hover {
+    color: var(--color-secondary-light);
+  }
+
+  .social-links {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .social-link:hover {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-smoke-white);
+  }
+
+  .bottom {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(245, 243, 239, 0.15);
+    text-align: center;
+  }
+
+  .bottom small {
+    font-size: var(--text-xs);
+    color: var(--color-secondary-light);
+  }
+</style>

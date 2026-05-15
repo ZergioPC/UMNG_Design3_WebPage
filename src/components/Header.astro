@@ -8,12 +8,12 @@ import IconAccount from "@/assets/icons/IconAccount.astro";
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/catalogo', label: 'Catálogo' },
-  { href: '/nosotros', label: 'Nosotros' },
+  // { href: '/nosotros', label: 'Nosotros' },
   { href: '/contact', label: 'Contacto' },
 ];
 
 const iconColor = "var(--color-text-muted)";
-const iconSize = 24;
+const iconSize = 34;
 ---
 
 <header class="header">
@@ -67,13 +67,14 @@ const iconSize = 24;
   .header__icons {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: 30px;
   }
 
   .header__nav {
     display: flex;
     justify-content: center;
-    padding: 0 var(--container-padding) var(--space-3);
+    align-items: center;
+    background-color: var(--color-bg-alt);
   }
 
   .header__links {
